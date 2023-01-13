@@ -1,1 +1,5 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+.box_sidebar_main {
+    height: calc(100vh - 70px);
+}
