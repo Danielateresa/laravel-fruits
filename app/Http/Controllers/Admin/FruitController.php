@@ -17,7 +17,7 @@ class FruitController extends Controller
     public function index()
     {
         $fruits= Fruit::orderByDesc('id')->get();
-        return view('admin.index',compact('fruits'));
+        return view('admin.fruits.index',compact('fruits'));
     }
 
     /**

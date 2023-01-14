@@ -68,7 +68,7 @@
                         <svg class="bi pe-none me-2" width="40" height="32">
                             <use xlink:href="#bootstrap" />
                         </svg>
-                        <span class="fs-4">Sidebar</span>
+                        <span class="fs-4">Fruits database</span>
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
@@ -81,7 +81,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link link-dark">
+                            <a href="{{route('admin.dashboard')}}" class="nav-link link-dark">
                                 <svg class="bi pe-none me-2" width="16" height="16">
                                     <use xlink:href="#speedometer2" />
                                 </svg>
@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link link-dark">
+                            <a href="{{route('admin.fruits.index')}}" class="nav-link link-dark">
                                 <svg class="bi pe-none me-2" width="16" height="16">
                                     <use xlink:href="#table" />
                                 </svg>
