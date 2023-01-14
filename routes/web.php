@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FruitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
-   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth', 'verified')->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('fruits', FruitController::class)->parameters([
+        'fruits'=> 'fruit:slug'
+    ]);
 });
 
 

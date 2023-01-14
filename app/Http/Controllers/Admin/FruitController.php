@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Fruit;
 use App\Http\Requests\StoreFruitRequest;
 use App\Http\Requests\UpdateFruitRequest;
@@ -15,7 +16,8 @@ class FruitController extends Controller
      */
     public function index()
     {
-        //
+        $fruits= Fruit::orderByDesc('id')->get();
+        return view('admin.index',compact('fruits'));
     }
 
     /**

@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('fruits', function (Blueprint $table) {
             $table->id();
+            $table->string('img')->nullable();
+            $table->string('name');
+            $table->string('slug');
+            $table->float('weight', 5,2)->nullable();
+            $table->float('price', 4,2)->nullable();
             $table->timestamps();
         });
     }
