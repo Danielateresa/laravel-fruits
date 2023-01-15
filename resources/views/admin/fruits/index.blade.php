@@ -5,6 +5,15 @@
 <div class="d-flex justify-content-end">
     <a class="btn btn-primary my-3" href="{{route('admin.fruits.create')}}"><i class="fa-solid fa-plus"></i> add new</a>
 </div>
+
+@if(session('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    <strong>{{session('message')}}</strong>
+</div>
+@endif
+
 <div class="table-responsive">
     <table class="table table-striped
     table-hover	
@@ -26,14 +35,14 @@
             @forelse($fruits as $fruit)
             <tr class="table-primary">
                 <td scope="row">{{$fruit->id}}</td>
-                <td><img src="{{$fruit->img}}" alt=""></td>
+                <td><img class="img-fluid" src="{{asset('storage/' . $fruit->img)}}" alt=""></td>
                 <td>{{$fruit->name}}</td>
                 <td>{{$fruit->slug}}</td>
                 <td>{{$fruit->weight}}</td>
                 <td>{{$fruit->price}} €</td>
                 <td><a class="btn btn-primary" href="{{route('admin.fruits.show', $fruit->slug)}}"><i
                             class="fa-solid fa-eye"></i></a>
-                    <a class="btn btn-warning" href="{{route('admin.fruits.show', $fruit->slug)}}"><i
+                    <a class="btn btn-warning" href="{{route('admin.fruits.edit', $fruit->slug)}}"><i
                             class="fa-solid fa-pen-to-square"></i></a>
                     <form class="d-inline" action="{{route('admin.fruits.destroy', $fruit->slug)}}" method="post">
                         @csrf

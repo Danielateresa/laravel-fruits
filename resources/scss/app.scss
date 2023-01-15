@@ -3,3 +3,10 @@
 .box_sidebar_main {
     height: calc(100vh - 70px);
 }
+
+
+main {
+    img {
+        max-width: 200px;
+    }
+}

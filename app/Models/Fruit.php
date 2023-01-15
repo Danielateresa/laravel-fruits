@@ -16,7 +16,7 @@ class Fruit extends Model
 
 public static function createSlug($name)
 {
-    $fruit_slug = Str::slug('name');
+    $fruit_slug = Str::slug($name);
     return $fruit_slug;
 }
 }

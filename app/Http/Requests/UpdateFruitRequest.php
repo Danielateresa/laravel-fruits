@@ -13,7 +13,7 @@ class UpdateFruitRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateFruitRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'img' => 'nullable|image|max:250',
+            'name' => 'required|min:3',
+            'weight' => 'nullable',
+            'price' => 'nullable',
         ];
     }
 }

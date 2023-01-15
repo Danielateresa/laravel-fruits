@@ -50,7 +50,7 @@ class FruitController extends Controller
         }
 
         //creo lo slug dal name
-        $fruit_slug = Fruit::createSlug($val_data['img']);
+        $fruit_slug = Fruit::createSlug($val_data['name']);
 
         $val_data['slug'] = $fruit_slug;
         Fruit::create($val_data);
@@ -66,7 +66,7 @@ class FruitController extends Controller
      */
     public function show(Fruit $fruit)
     {
-        //
+        return view ('admin.fruits.show', compact('fruit'));
     }
 
     /**
@@ -77,7 +77,7 @@ class FruitController extends Controller
      */
     public function edit(Fruit $fruit)
     {
-        //
+        return view('admin.fruits.edit', compact('fruit'));
     }
 
     /**
@@ -89,7 +89,28 @@ class FruitController extends Controller
      */
     public function update(UpdateFruitRequest $request, Fruit $fruit)
     {
-        //
+        //validazione dati
+        $val_data = $request->validated();
+
+        if($request->hasFile('img')){
+            //se c'è già un'immagine, la cancello
+            if($fruit->img){
+                Storage::delete($fruit->img);
+            }
+            //per poi inserirne un altra
+            $img = Storage::put('uploads',$val_data['img']);
+
+            //sostituisco il valore di img nei dati validati
+            $val_data['img'] = $img;
+        }
+
+        //creo lo slug dal name
+        $fruit_slug = Fruit::createSlug($val_data['name']);
+
+        $val_data['slug'] = $fruit_slug;
+        $fruit->update($val_data);
+
+        return to_route('admin.fruits.index')->with('message', " Fruit $fruit->name modified");
     }
 
     /**
@@ -100,6 +121,13 @@ class FruitController extends Controller
      */
     public function destroy(Fruit $fruit)
     {
-        //
+        //se c'è già un'immagine salavata nella cartella storage>app>public>uploads, la cancello per non accumularle
+        if($fruit->img){
+            Storage::delete($fruit->img);
+        }
+
+        $fruit->delete();
+        return to_route('admin.fruits.index')->with('message', "Fruit $fruit->name deleted");
+
     }
 }
