@@ -2,7 +2,9 @@
 
 @section('content')
 <h1>Fruits database</h1>
-
+<div class="d-flex justify-content-end">
+    <a class="btn btn-primary my-3" href="{{route('admin.fruits.create')}}"><i class="fa-solid fa-plus"></i> add new</a>
+</div>
 <div class="table-responsive">
     <table class="table table-striped
     table-hover	
@@ -28,7 +30,17 @@
                 <td>{{$fruit->name}}</td>
                 <td>{{$fruit->slug}}</td>
                 <td>{{$fruit->weight}}</td>
-                <td>{{$fruit->price}}</td>
+                <td>{{$fruit->price}} €</td>
+                <td><a class="btn btn-primary" href="{{route('admin.fruits.show', $fruit->slug)}}"><i
+                            class="fa-solid fa-eye"></i></a>
+                    <a class="btn btn-warning" href="{{route('admin.fruits.show', $fruit->slug)}}"><i
+                            class="fa-solid fa-pen-to-square"></i></a>
+                    <form class="d-inline" action="{{route('admin.fruits.destroy', $fruit->slug)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit"><i class="fa-solid fa-eraser"></i></button>
+                    </form>
+                </td>
             </tr>
             @empty
             <h3>No fruits on database yet</h3>

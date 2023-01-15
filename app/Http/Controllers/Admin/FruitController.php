@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Fruit;
 use App\Http\Requests\StoreFruitRequest;
 use App\Http\Requests\UpdateFruitRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 class FruitController extends Controller
 {
@@ -27,7 +29,7 @@ class FruitController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.fruits.create');
     }
 
     /**
@@ -38,7 +40,22 @@ class FruitController extends Controller
      */
     public function store(StoreFruitRequest $request)
     {
-        //
+        //validazione dati
+        $val_data = $request->validated();
+
+        if($request->hasFile('img')){
+            $img = Storage::put('uploads',$val_data['img']);
+
+            $val_data['img'] = $img;
+        }
+
+        //creo lo slug dal name
+        $fruit_slug = Fruit::createSlug($val_data['img']);
+
+        $val_data['slug'] = $fruit_slug;
+        Fruit::create($val_data);
+
+        return to_route('admin.fruits.index')->with('message', 'New fruit added on database');
     }
 
     /**
