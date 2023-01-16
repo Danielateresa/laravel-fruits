@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Exists;
 
 class StoreFruitRequest extends FormRequest
 {
@@ -26,6 +27,7 @@ class StoreFruitRequest extends FormRequest
         return [
             'img' => 'nullable|image|max:250',
             'name' => 'required|min:3',
+            'category_id' => 'nullable|exists:categories,id',
             'weight' => 'nullable',
             'price' => 'nullable',
         ];

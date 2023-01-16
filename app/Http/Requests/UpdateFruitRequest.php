@@ -26,6 +26,7 @@ class UpdateFruitRequest extends FormRequest
         return [
             'img' => 'nullable|image|max:250',
             'name' => 'required|min:3',
+            'category_id' => 'nullable|exists:categories,id',
             'weight' => 'nullable',
             'price' => 'nullable',
         ];

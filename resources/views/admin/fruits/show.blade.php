@@ -14,6 +14,8 @@
         <p class="card-title">{{$fruit->name}}</p>
         <h4>Fruit slug: </h4>
         <p>{{$fruit->slug}}</p>
+        <h4>Fruit category: </h4>
+        <p>{{$fruit->category ? $fruit->category->name : 'No category'}}</p>
         <h4>Fruit weight: </h4>
         <p>{{$fruit->weight}}</p>
         <h4>Fruit price: </h4>

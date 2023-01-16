@@ -54,6 +54,25 @@
         @enderror
 
         <div class="mb-3">
+            <label for="category_id" class="form-label">Categories</label>
+            <select class="form-select form-select-lg @error('category_id') is-invalid @enderror" name="category_id"
+                id="category_id">
+                <option value="">Select Type</option>
+                @forelse($categories as $category)
+                <option value="{{$category->id}}"
+                    {{ $category->id == old('category_id',  $fruit->category ? $fruit->category->id : '') ? 'selected' : '' }}>
+                    {{$category->name}}
+                </option>
+                @empty
+                <option value="">no category found</option>
+                @endforelse
+            </select>
+        </div>
+        @error('category_id')
+        <div class="alert alert-danger">{{$message}}</div>
+        @enderror
+
+        <div class="mb-3">
             <label for="weight" class="form-label">Weight</label>
             <input type="number" name="weight" id="weight" class="form-control @error('weight') is-invalid @enderror"
                 placeholder="" aria-describedby="helpId" step="0.01" value="{{ old('weight', $fruit->weight) }}">

@@ -7,6 +7,7 @@ use App\Models\Fruit;
 use App\Http\Requests\StoreFruitRequest;
 use App\Http\Requests\UpdateFruitRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
 
 
 class FruitController extends Controller
@@ -29,7 +30,9 @@ class FruitController extends Controller
      */
     public function create()
     {
-        return view('admin.fruits.create');
+        $categories = Category::all();
+        //dd($categories);
+        return view('admin.fruits.create',compact('categories'));
     }
 
     /**
@@ -54,6 +57,7 @@ class FruitController extends Controller
 
         $val_data['slug'] = $fruit_slug;
         Fruit::create($val_data);
+        //dd($val_data);
 
         return to_route('admin.fruits.index')->with('message', 'New fruit added on database');
     }
@@ -77,7 +81,8 @@ class FruitController extends Controller
      */
     public function edit(Fruit $fruit)
     {
-        return view('admin.fruits.edit', compact('fruit'));
+        $categories = Category::all();
+        return view('admin.fruits.edit', compact('fruit', 'categories'));
     }
 
     /**
